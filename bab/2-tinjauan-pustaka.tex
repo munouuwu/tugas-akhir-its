@@ -6,48 +6,35 @@
 \section{Penelitian Terdahulu}
 \label{sec:penelitianterdahulu}
 
-\subsection{Hukum Newton}
-\label{subsec:hukumnewton}
+Pandu Deski Prasetyo dkk. \citep{prasetyo} menggunakan dataset buatan sendiri yang berisikan 250 berkas musik yang terbagi menjadi genre pop, rock, dangdut, jazz, dan folk. Masing-masing genre memiliki sampel data sebanyak 50 berkas musik. Metode yang digunakan adalah Mel-Frequency Cepstrum Coefficients dengan k-Nearest Neighbors sebagai classifier-nya. Hasil akurasi yang diperoleh dengan k = 13 adalah sebanyak 52.4%.
 
-Newton \citep{newton1687} pernah merumuskan bahwa \lipsum[1]
-Kemudian menjadi persamaan seperti pada persamaan \ref{eq:hukumpertamanewton}.
+Hareesh Bahuleyan \citep{DBLP:journals/corr/abs-1804-01149} menggunakan dataset Audio Set yang dimana merupakan hasil dari ekstraksi klip suara 10 detik dari total 2,1 juta video YouTube. Klip suara tersebut berisikan bermacam-macam suara seperti instrumen musik, suara kendaraan, suara hewan, dan lain sebagainya. Namun, yang digunakan pada penelitian itu hanyalah suara berkategori musik dengan total 40.540 klip suara musik dengan genre-genre seperti Pop, Rock, Hip Hop, Techno, Rhythm Blues, Vocal, dan Reggae. Metode yang digunakan adalah dengan membuat Mel-Spektrogram dari klip suara yang kemudian menggunakan model Convolutional Neural Network (CNN), serta berbagai macam classifier, seperti Logistic Regression (LR), Random Forest (RF), Gradient Boosting (XGB), serta Support Vector Machines (SVM). Hasil akurasi yang diperoleh dengan metode CNN Transfer Learning sebanyak 63\%, CNN Fine Tuning sebanyak 64\%, LR sebanyak 53\%, RF sebanyak 54\%, SVM sebanyak 57\% XGB sebanyak 59\%, dan gabungan CNN dengan XGB sebanyak 65\%.
 
-% Contoh input gambar
-\begin{figure}[ht]
-  \centering
+Michael Haggblade dkk. \citep{Haggblade2011MusicGC} menggunakan dataset GTZAN Genre Collection yang berisikan 1000 trek musik dengan durasi masing-masing sepanjang 30 detik. Terdapat 10 genre pada dataset tersebut dengan masing-masing 100 trek. Pada penelitian itu, hanya digunakan 4 genre (Classical, Jazz, Metal, dan Pop) dengan total 400 trek musik. Metode yang digunakan adalah Mel-Frequency Cepstrum Coefficients dengan k-Nearest Neighbors, k-Means, DAG SVM, dan Neural Network sebagai classifier-nya. Hasil akurasi yang diperoleh dengan urutan genre Classical, Jazz, Metal, dan Pop dengan metode DAG SVM sebanyak 97\%, 67\%, 87\%, dan 97\%, Neural Network sebanyak 88\%, 100\%, 76\%, dan 100\%, k-Means sebanyak 88\%, 61\%, 93\%, dan 90\%, serta k-NN sebanyak 87\%, 67\%, 80\%, dan 90\%.
 
-  % Ubah dengan nama file gambar dan ukuran yang akan digunakan
-  \includegraphics[scale=0.35]{gambar/roketluarangkasa.jpg}
+\subsection{Machine Learning}
 
-  % Ubah dengan keterangan gambar yang diinginkan
-  \caption{Peluncuran roket luar angkasa \emph{Discovery} \citep{roketluarangkasa}.}
-  \label{fig:roketluarangkasa}
-\end{figure}
+% Contoh penggunaan referensi dari pustaka
+% Newton pernah merumuskan \citep{Newton1687} bahwa \lipsum[8]
+% Contoh penggunaan referensi dari persamaan
+% Kemudian menjadi persamaan seperti pada persamaan \ref{eq:FirstLaw}.
 
-Roket luar angkasa merupakan \lipsum[1]
+Pembelajaran Mesin (Machine Learning) merupakan suatu bidang ilmu komputer yang berkembang dari studi pengenalan pola dan teori pembelajaran komputasional dalam kecerdasan buatan. Prediksi dari suatu dataset dapat dilakukan dengan cara membangun suatu algoritma yang dapat mempelajari dataset tersebut. Prosedur ini dioperasikan dengan cara mengkonstruksikan suatu model dari contoh input untuk membuat sebuah prediksi berbasis data, tidak seperti instruksi program statis seperti pada umumnya \citep{machineL}.
 
-\emph{Discovery}, Gambar \ref{fig:roketluarangkasa}, merupakan \lipsum[2]
+\subsection{Deep Learning}
+Deep Learning merupakan salah satu pendekatan kecerdasan buatan dan tipe dari pembelajaran mesin. Deep Learning adalah salah satu jenis pembelajaran mesin yang dapat mencapai kekuatan yang tinggi serta fleksibilitas belajar untuk merepresentasikan dunia sebagai sebuah konsep nested hierarchy yang tiap-tiap konsepnya didefinisikan dalam kaitannya dengan konsep yang lebih sederhana, serta representasi yang lebih abstrak dikomputasikan dengan cara yang lebih tidak abstrak \citep{deepL}.
+% input gambar
+%\begin{figure} [H] \centering
+% Nama dari file gambar yang diinputkan
+%\includegraphics[scale=0.6]{gambar/umur.png}
+% Keterangan gambar yang diinputkan
+%\caption{Kategori umur menurut Depkes. RI (2009)}
+% Label referensi dari gambar yang diinputkan
+% \label{fig:Umur}
+%\end{figure}
 
-% Per Teori Penunjang dibuat section baru
+\subsection{Convolutional Neural Network (CNN)}
+Convolutional Neural Network adalah salah satu jenis dari neural network untuk memproses data yang memiliki topologi seperti grid. Contohnya adalah, data time-series yang dimana dapat digambarkan sebagai sebuah grid 1 dimensi yang mengambil sampel pada suatu interval waktu, dan data gambar yang dimana dapat dikatakan sebagai sebuah grid 2 dimensi berisikan piksel-piksel. Nama dari “Convolutional Neural Network” itu sendiri mengimplikasikan bahwa suatu network menggunakan operasi matematika yang disebut sebagai konvolusi. Konvolusi sendiri merupakan salah satu jenis dari operasi linear. Convolutional Network adalah sebuah neural network yang menggunakan konvolusi sebagai pengganti matriks perkalian umum di minimal salah satu lapisannya \citep{deepL}.
 
-\section{Gravitasi}
-\label{sec:gravitasi}
-
-Gravitasi merupakan \lipsum[1]
-
-\subsection{Hukum Newton}
-\label{subsec:hukumnewton2}
-
-Newton \citep{newton1687} pernah merumuskan bahwa \lipsum[1]
-Kemudian menjadi persamaan seperti pada persamaan \ref{eq:hukumpertamanewton}.
-
-% Contoh pembuatan persamaan
-\begin{equation}
-  \label{eq:hukumpertamanewton}
-  \sum \mathbf{F} = 0\; \Leftrightarrow\; \frac{\mathrm{d} \mathbf{v} }{\mathrm{d}t} = 0.
-\end{equation}
-
-\subsection{Anti Gravitasi}
-\label{subsec:antigravitasi}
-
-Anti gravitasi merupakan \lipsum[1]
+\subsection{Mel-Frequency Coefficient of Cepstrum (MFCC)}
+Mel-Frequency Cepstrum sangat efektif digunakan pada pengenalan suara, serta pemodelan subjective pitch dan konten frekuensi pada sinyal audio \citep{hmmaudio}. Mel-Frequency Ceptral Coefficient (MFCC) dikembangkan oleh Davis dan Memelstein, merupakan sebuah metode ekstraksi fitur audio dengan cara menghitung koefisien ceptral berdasarkan variasi frekuensi kritis pada pendengaran manusia \citep{Widodo2017PenerapanMM}.

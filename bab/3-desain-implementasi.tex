@@ -3,28 +3,213 @@
 
 % Ubah bagian-bagian berikut dengan isi dari desain dan implementasi
 
-Penelitian ini dilaksanakan sesuai \lipsum[1][1-5]
+\usetikzlibrary{positioning, fit, calc}   
+\tikzset{block/.style={draw, thick, text width=2.5cm ,minimum height=1.3cm, align=center},   
+	line/.style={-latex}     
+}   
+
+Penelitian ini dilaksanakan sesuai dengan desain sistem serta implementasinya. Desain sistem meliputi konsep serta langkah-langkah pembuatan dan perancangan infrastruktur yang digambarkan dalam bentuk blok-blok alur pengerjaan. Bagian implementasi berisikan pelaksanaan teknis untuk setiap blok pada desain sistem
 
 
 \section{Peralatan}
 \label{sec:peralatan}
 
-Alat yang digunakan yaitu: \lipsum[1]
+Alat yang digunakan pada Tugas Akhir ini yang pertama adalah platform Google Colab. Platform ini digunakan untuk melakukan training data karena menyediakan bahasa pemrograman python dengan library-nya serta resource GPU yang dapat digunakan secara online.
+
+Yang kedua adalah Visual Studio Code. Software ini juga digunakan untuk keperluan pemrograman python baik untuk training, maupun keperluan lainnya.
 
 \subsection{Perangkat}
 \label{subsec:perangkat}
 
-Perangkat yang digunakan menggunakan spesifikasi \lipsum[1]
+	Perangkat yang digunakan merupakan sebuah laptop dengan spesifikasi sesuai yang tertera pada Tabel 3.1.
+	
+	\begin{table}[h]
+		\centering
+		
+		\caption{Spesifikasi Perangkat}
+		
+		\begin{tabular}{|c|c|}
+			\hline
+			\textbf{Processor}        & Intel(R) Core(TM) i5-10200H CPU @ 2.40GHz \\ \hline
+			\textbf{RAM}              & 16 GB DDR4                                \\ \hline
+			\textbf{Storage}          & SSD 512 GB + 1 TB                         \\ \hline
+			\textbf{Graphics Card}    & Nvidia GeForce RTX 3060 6GB Laptop        \\ \hline
+			\textbf{Operating System} & Windows 10 Home                           \\ \hline
+		\end{tabular}
+	
+		\label{fig:perangkat}
+	\end{table}
 
 \section{Desain Sistem}
 \label{sec:desainsistem}
 
-Sistem akan dibuat dengan \lipsum[1-2]
+Tugas Akhir ini mengimplementasikan Deep Learning untuk mengklasifikasikan subgenre dari suatu input potongan trek musik 30 detik yang berasal dari genre yang berbeda-beda menggunakan algoritma Convolutional Neural Network (CNN).
+
+\begin{figure}[h]
+	\centering
+	
+	% Ubah dengan nama file gambar dan ukuran yang akan digunakan
+	\includegraphics[width=\textwidth]{gambar/desain sistem1}
+	
+	% Ubah dengan keterangan gambar yang diinginkan
+	\caption{Desain Sistem}
+	\label{fig:desainsistem}
+\end{figure}
+
+Tahapan sistem klasifikasi subgenre musik sesuai pada Gambar 3.1:
+
+\begin{enumerate}
+	\item Pengumpulan Data
+	
+	Dataset yang digunakan adalah Free Music Archive yang berisikan potongan-potongan musik dengan durasi 30 detik yang sudah dilabeli subgenrenya.
+	\item Preprocessing Data
+	
+	Tahap ini meliputi pemotongan input trek menjadi beberapa segmen serta ekstraksi MFCC yang kemudian dikompilasikan di sebuah file json.
+	\item Training
+	
+	Training dataset dilakukan pada model CNN yang telah dirancang.
+	
+	\item Testing
+	
+	Mengevaluasi model yang telah dilakukan training dengan simulasi test data yang kemudian dihitung akurasinya.
+	
+	\item Klasifikasi Subgenre
+	
+	Setelah mendapatkan model yang optimal, sistem dapat digunakan untuk mengklasifikasikan suatu input musik ke dalam 3 subgenre yang paling masuk akal.
+	
+\end{enumerate}
+
+
+
+\section{Pengumpulan Dataset}
+\label{sec:pengumpulan dataset}
+
+Dataset yang digunakan merupakan kumpulan musik dari 3 Genre, yaitu Rock, Folk, dan Electronic. Lalu, diambil masing-masing 3 Subgenre dengan jumlah trek sebanyak 200 tiap subgenrenya sehingga mencapai total 2700 trek. Kumpulan musik ini berupa file mp3 dari potongan 30 detik lagu yang disediakan oleh Free Music Archive(FMA). FMA ini sendiri merupakan sebuah website yang berisikan kumpulan musik-musik royalty-free. Berikut tabel dataset yang digunakan pada Tugas Akhir ini:
+
+\begin{table}[h]
+	\centering
+	
+	\caption{Dataset yang digunakan}
+	
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Genre}              & \textbf{Subgenre} & \textbf{Jumlah} \\ \hline
+		\multirow{3}{*}{Rock}       & Loud Rock         & 200             \\ \cline{2-3} 
+		& Noise Rock        & 200             \\ \cline{2-3} 
+		& Post Rock         & 200             \\ \hline
+		\multirow{3}{*}{Folk}       & Freak Folk        & 200             \\ \cline{2-3} 
+		& Free Folk         & 200             \\ \cline{2-3} 
+		& Psych Folk        & 200             \\ \hline
+		\multirow{3}{*}{Electronic} & Chiptune          & 200             \\ \cline{2-3} 
+		& Glitch            & 200             \\ \cline{2-3} 
+		& House             & 200             \\ \hline
+	\end{tabular}
+	
+	\label{fig:dataset}
+\end{table}
+
+\section{Preprocessing Data}
+\label{sec:preprocessing}
+
+Sebelum dataset kumpulan musik diolah, perlu untuk dilakukan ekstraksi fitur yang dibutuhkan terlebih dahulu. Fitur yang digunakan pada Tugas Akhir ini adalah Mel-frequency cepstral coefficients (MFCC). Sebelum ekstraksi, dilakukan segmentasi file audio menjadi 10 segmen. Dengan ini, maka didapat potongan 3 detik sebanyak 10 buah per trek musik 30 detik. Hal ini dilakukan karena pada deep learning diperlukan jumlah dataset yang banyak. 
+
+\begin{table}[h]
+	
+	\centering
+	
+	\caption{Parameter MFCC}
+	
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Parameter} & \textbf{Keterangan} \\ \hline
+		Sample Rate        & 22050               \\ \hline
+		N FFT              & 2048                \\ \hline
+		Hop Length         & 512                 \\ \hline
+		N MFCC             & 13                  \\ \hline
+	\end{tabular}
+
+	\label{fig:mfccparameter}
+\end{table}
+
+Setelah segmentasi, dilakukan ekstraksi MFCC dengan parameter seperti yang tertera pada Tabel 3.3. Berikut Gambar 3.2 adalah hasil contoh ekstraksi trek musik 30 detik menjadi 10 segmen MFCC.
+
+\begin{figure}[h]
+	\centering
+	
+	% Ubah dengan nama file gambar dan ukuran yang akan digunakan
+	\includegraphics[width=\textwidth]{gambar/mfcc segments1}
+	
+	% Ubah dengan keterangan gambar yang diinginkan
+	\caption{Plotting MFCC 10 Segmen}
+	\label{fig:mfccsegmen}
+\end{figure}
+
+Ekstraksi dilakukan dengan menggunakan library dari python yang bernama LibROSA. Hasil ekstraksi MFCC tiap segmennya dilakukan transpose, kemudian dikompilasikan ke dalam sebuah file json. Pada file tersebut juga diberikan labeling untuk tiap subgenre (total 9 label) dan mapping untuk masing-masing label (0-8).
+
+\section{Training}
+\label{sec:training}
+
+Setelah didapatkan hasil pemrosesan dataset serta pelabelannya, dilakukan training dataset agar komputer dapat mempelajari karakteristik dari masing-masing subgenre menggunakan fitur MFCC-nya. Proses training dilakukan menggunakan framework Convolutional Neural Network (CNN). Layer disusun seperti yang tertera pada Tabel 3.4.
+
+\begin{table}[h]
+	\centering
+	
+	\caption{Susunan Layer CNN}
+	
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Layer (type)}                        & \textbf{Output Shape} & \textbf{Param \#} \\ \hline
+		conv2d\_6 (Conv2D)                           & (None, 128, 11, 32)   & 320               \\ \hline
+		max\_pooling2d\_6 (MaxPooling2D)             & (None, 64, 6, 32)     & 0                 \\ \hline
+		batch\_normalization\_6 (BatchNormalization) & (None, 64, 6, 32)     & 128               \\ \hline
+		activation\_6 (Activation)                   & (None, 64, 6, 32)     & 0                 \\ \hline
+		dropout\_6 (Dropout)                         & (None, 64, 6, 32)     & 0                 \\ \hline
+		conv2d\_7 (Conv2D)                           & (None, 62, 4, 64)     & 18496             \\ \hline
+		max\_pooling2d\_7 (MaxPooling2D)             & (None, 31, 2, 64)     & 0                 \\ \hline
+		batch\_normalization\_7 (BatchNormalization) & (None, 31, 2, 64)     & 256               \\ \hline
+		activation\_7 (Activation)                   & (None, 31, 2, 64)     & 0                 \\ \hline
+		dropout\_7 (Dropout)                         & (None, 31, 2, 64)     & 0                 \\ \hline
+		conv2d\_8 (Conv2D)                           & (None, 30, 1, 32)     & 8224              \\ \hline
+		max\_pooling2d\_8 (MaxPooling2D)             & (None, 15, 1, 32)     & 0                 \\ \hline
+		batch\_normalization\_8 (BatchNormalization) & (None, 15, 1, 32)     & 128               \\ \hline
+		activation\_8 (Activation)                   & (None, 15, 1, 32)     & 0                 \\ \hline
+		flatten\_2 (Flatten)                         & (None, 480)           & 0                 \\ \hline
+		dense\_4 (Dense)                             & (None, 64)            & 30784             \\ \hline
+		dropout\_8 (Dropout)                         & (None, 64)            & 0                 \\ \hline
+		dense\_5 (Dense)                             & (None, 9)             & 585               \\ \hline
+	\end{tabular}
+
+	\label{fig:layercnn}
+\end{table}
+
+Konfigurasi yang digunakan pada model seperti yang tertera pada Tabel 3.5.
+
+\begin{table}[h]
+	
+	\centering
+	
+	\caption{Konfigurasi Model}
+	
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Jenis Konfigurasi} & \textbf{Keterangan} \\ \hline
+		Classes                    & 9                   \\ \hline
+		Batch                      & 16                  \\ \hline
+		Epoch                      & 70                  \\ \hline
+		Input Shape                & (130, 13, 1)        \\ \hline
+	\end{tabular}
+
+	\label{fig:konfigurasimodel}
+\end{table}
+
+Classes merupakan jumlah label subgenre yang ingin diklasifikasikan. Batch size menentukan jumlah segmen MFCC yang diproses tiap Epoch-nya. Input shape merupakan ukuran dari array yang akan dilakukan training.
+
+\section{Testing}
+\label{sec:testing}
+
+Pada tahap testing, dilakukan perhitungan serta plotting confusion matrix untuk dapat melihat performa model untuk mengklasifikasikan masing-masing subgenre. Selain itu, dapat juga diketahui similaritas dari masing-masing subgenre serta hubungan antara satu dengan yang lainnya. Selanjutnya, dilakukan percobaan dengan input trek musik dengan berbagai macam durasi (maksimal 30 detik) dan melihat prediksi yang dilakukan oleh sistem dengan cara menampilkan 3 subgenre dengan probabilitas tertinggi.
 
 % Per blok diagram dijelaskan dan dibuatkan section masing-masing
-
-% \section{Blok Diagram}
-% \label{sec:blokdiagram}
 
 % Contoh pembuatan potongan kode
 \begin{lstlisting}[
@@ -50,3 +235,4 @@ int main() {
 ]{program/bilangan-prima.py}
 
 \lipsum[4]
+
