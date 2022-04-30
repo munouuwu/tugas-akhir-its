@@ -14,20 +14,51 @@ Penelitian ini dilaksanakan sesuai dengan desain sistem serta implementasinya. D
 \section{Peralatan}
 \label{sec:peralatan}
 
-Alat yang digunakan pada Tugas Akhir ini yang pertama adalah platform Google Colab. Platform ini digunakan untuk melakukan training data karena menyediakan bahasa pemrograman python dengan library-nya serta resource GPU yang dapat digunakan secara online.
+Peralatan yang digunakan pada Tugas Akhir ini antara lain adalah Free Music Archive (FMA) Dataset, Google Colab, Anaconda Navigator, Visual Studio Code, Laptop, dan Desktop PC.
 
-Yang kedua adalah Visual Studio Code. Software ini juga digunakan untuk keperluan pemrograman python baik untuk training, maupun keperluan lainnya.
+\subsection{Free Music Archive}
+\label{subsec:fma}
+Free Music Archive (FMA) merupakan sebuah dataset open-source yang biasa digunakan untuk keperluan Music Information Retrieval (MIR), seperti pengolahan data audio musik beserta fitur-fiturnya. Dataset ini berisikan 106.754 trek musik dengan metadatanya seperti ID, title, artist, genres, tags, dan play counts. Pada dataset ini terdapat total 161 genre (termasuk subgenre)\citep{fmadataset}.
 
-\subsection{Perangkat}
-\label{subsec:perangkat}
+\subsection{Anaconda Navigator}
+\label{subsec:anacondanav}
+Anaconda Navigator merupakan sebuah Graphical User Interface (GUI) untuk mendistribusikan Python dan R untuk segala keperluan komputasi ilmiah. Pada penelitian ini, Anaconda Navigator digunakan untuk men-deploy VS Code, serta instalasi segala package yang diperlukan.
 
-	Perangkat yang digunakan merupakan sebuah laptop dengan spesifikasi sesuai yang tertera pada Tabel 3.1.
+\subsection{Visual Studio Code}
+\label{subsec:vscode}
+Visual Studio Code (VS Code) merupakan sebuah editor source code yang dikembangkan oleh Microsoft dan dapat digunakan untuk sistem operasi Windows, Linux, dan MacOS. Pada penelitian ini VS Code, disambungkan dengan Anaconda, digunakan untuk melakukan preprocessing serta training dataset.
+
+\subsection{Desktop PC}
+\label{subsec:desktop}
+Desktop PC digunakan sebagai device untuk menjalankan Visual Studio Code dan penulisan buku. Berikut spesifikasi Desktop PC sesuai yang tertera pada Tabel 3.1.
+
+\begin{table}[h]
+	\centering
+	
+	\caption{Spesifikasi Desktop PC}
+	\begin{adjustbox}{width=0.7\columnwidth, center}
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Processor}        & Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz \\ \hline
+		\textbf{RAM}              & 16 GB DDR3                                \\ \hline
+		\textbf{Storage}          & SSD 512 GB + HDD 1 TB                         \\ \hline
+		\textbf{Graphics Card}    & AMD Radeon RX 5600 XT 6GB        \\ \hline
+		\textbf{Operating System} & Windows 10 Home                           \\ \hline
+	\end{tabular}
+	\end{adjustbox}
+	\label{fig:desktoptable}
+\end{table}
+
+\subsection{Laptop}
+\label{subsec:laptop}
+
+	Laptop digunakan untuk berbagai macam hal. Antara lain adalah sebagai device untuk menjalankan Visual Studio Code, melakukan training dataset, dan penulisan buku. Berikut spesifikasi laptop sesuai yang tertera pada Tabel 3.2.
 	
 	\begin{table}[h]
 		\centering
 		
-		\caption{Spesifikasi Perangkat}
-		
+		\caption{Spesifikasi Laptop}
+		\begin{adjustbox}{width=0.7\columnwidth, center}
 		\begin{tabular}{|c|c|}
 			\hline
 			\textbf{Processor}        & Intel(R) Core(TM) i5-10200H CPU @ 2.40GHz \\ \hline
@@ -36,25 +67,14 @@ Yang kedua adalah Visual Studio Code. Software ini juga digunakan untuk keperlua
 			\textbf{Graphics Card}    & Nvidia GeForce RTX 3060 6GB Laptop        \\ \hline
 			\textbf{Operating System} & Windows 10 Home                           \\ \hline
 		\end{tabular}
-	
-		\label{fig:perangkat}
+	\end{adjustbox}
+		\label{fig:laptoptable}
 	\end{table}
 
 \section{Desain Sistem}
 \label{sec:desainsistem}
 
 Tugas Akhir ini mengimplementasikan Deep Learning untuk mengklasifikasikan subgenre dari suatu input potongan trek musik 30 detik yang berasal dari genre yang berbeda-beda menggunakan algoritma Convolutional Neural Network (CNN).
-
-\begin{figure}[h]
-	\centering
-	
-	% Ubah dengan nama file gambar dan ukuran yang akan digunakan
-	\includegraphics[width=\textwidth]{gambar/desain sistem1}
-	
-	% Ubah dengan keterangan gambar yang diinginkan
-	\caption{Desain Sistem}
-	\label{fig:desainsistem}
-\end{figure}
 
 Tahapan sistem klasifikasi subgenre musik sesuai pada Gambar 3.1:
 
@@ -73,18 +93,29 @@ Tahapan sistem klasifikasi subgenre musik sesuai pada Gambar 3.1:
 	
 	Mengevaluasi model yang telah dilakukan training dengan simulasi test data yang kemudian dihitung akurasinya.
 	
-	\item Klasifikasi Subgenre
+	\item Simulasi
 	
 	Setelah mendapatkan model yang optimal, sistem dapat digunakan untuk mengklasifikasikan suatu input musik ke dalam 3 subgenre yang paling masuk akal.
 	
 \end{enumerate}
+
+\begin{figure}[b]
+	\centering
+	
+	% Ubah dengan nama file gambar dan ukuran yang akan digunakan
+	\includegraphics[width=\textwidth]{gambar/desain sistem2}
+	
+	% Ubah dengan keterangan gambar yang diinginkan
+	\caption{Desain Sistem}
+	\label{fig:desainsistem}
+\end{figure}
 
 
 
 \section{Pengumpulan Dataset}
 \label{sec:pengumpulan dataset}
 
-Dataset yang digunakan merupakan kumpulan musik dari 3 Genre, yaitu Rock, Folk, dan Electronic. Lalu, diambil masing-masing 3 Subgenre dengan jumlah trek sebanyak 200 tiap subgenrenya sehingga mencapai total 2700 trek. Kumpulan musik ini berupa file mp3 dari potongan 30 detik lagu yang disediakan oleh Free Music Archive(FMA). FMA ini sendiri merupakan sebuah website yang berisikan kumpulan musik-musik royalty-free. Berikut tabel dataset yang digunakan pada Tugas Akhir ini:
+Dataset yang digunakan merupakan kumpulan musik dari 3 Genre, yaitu Rock, Folk, dan Electronic. Lalu, diambil masing-masing 3 Subgenre dengan jumlah trek sebanyak 200 tiap subgenrenya sehingga mencapai total 2700 trek. Kumpulan musik ini berupa file mp3 dari potongan 30 detik lagu yang disediakan oleh Free Music Archive(FMA) \citep{fmadataset}. FMA ini sendiri merupakan sebuah website yang berisikan kumpulan musik-musik royalty-free. Berikut tabel dataset yang digunakan pada Tugas Akhir ini:
 
 \begin{table}[h]
 	\centering
@@ -149,7 +180,7 @@ Ekstraksi dilakukan dengan menggunakan library dari python yang bernama LibROSA.
 \section{Training}
 \label{sec:training}
 
-Setelah didapatkan hasil pemrosesan dataset serta pelabelannya, dilakukan training dataset agar komputer dapat mempelajari karakteristik dari masing-masing subgenre menggunakan fitur MFCC-nya. Proses training dilakukan menggunakan framework Convolutional Neural Network (CNN). Layer disusun seperti yang tertera pada Tabel 3.4.
+Setelah didapatkan hasil pemrosesan dataset serta pelabelannya, dilakukan training dataset agar komputer dapat mempelajari karakteristik dari masing-masing subgenre menggunakan fitur MFCC-nya. Dataset dibagi menjadi 3, yaitu Training Data (60\%), Validation Data (20\%), dan Test Data (20\%). Proses training dilakukan menggunakan framework Convolutional Neural Network (CNN). Layer disusun seperti yang tertera pada Tabel 3.5.
 
 \begin{table}[h]
 	\centering
@@ -182,7 +213,7 @@ Setelah didapatkan hasil pemrosesan dataset serta pelabelannya, dilakukan traini
 	\label{fig:layercnn}
 \end{table}
 
-Konfigurasi yang digunakan pada model seperti yang tertera pada Tabel 3.5.
+Konfigurasi yang digunakan pada model dapat dilihat seusai seperti yang tertera pada Tabel 3.6.
 
 \begin{table}[h]
 	
@@ -194,45 +225,18 @@ Konfigurasi yang digunakan pada model seperti yang tertera pada Tabel 3.5.
 		\hline
 		\textbf{Jenis Konfigurasi} & \textbf{Keterangan} \\ \hline
 		Classes                    & 9                   \\ \hline
-		Batch                      & 16                  \\ \hline
-		Epoch                      & 70                  \\ \hline
-		Input Shape                & (130, 13, 1)        \\ \hline
+		Batch                      & 8/16/32                 \\ \hline
+		Epoch                      & 80/100                  \\ \hline
 	\end{tabular}
 
 	\label{fig:konfigurasimodel}
 \end{table}
 
-Classes merupakan jumlah label subgenre yang ingin diklasifikasikan. Batch size menentukan jumlah segmen MFCC yang diproses tiap Epoch-nya. Input shape merupakan ukuran dari array yang akan dilakukan training.
+Classes merupakan jumlah label subgenre yang ingin diklasifikasikan. Batch size menentukan jumlah segmen MFCC yang diproses tiap Epoch-nya. Pada penelitian ini digunakan 3 Batch Size serta 2 Epoch yang berbeda untuk pengujian. 
 
 \section{Testing}
 \label{sec:testing}
 
 Pada tahap testing, dilakukan perhitungan serta plotting confusion matrix untuk dapat melihat performa model untuk mengklasifikasikan masing-masing subgenre. Selain itu, dapat juga diketahui similaritas dari masing-masing subgenre serta hubungan antara satu dengan yang lainnya. Selanjutnya, dilakukan percobaan dengan input trek musik dengan berbagai macam durasi (maksimal 30 detik) dan melihat prediksi yang dilakukan oleh sistem dengan cara menampilkan 3 subgenre dengan probabilitas tertinggi.
 
-% Per blok diagram dijelaskan dan dibuatkan section masing-masing
-
-% Contoh pembuatan potongan kode
-\begin{lstlisting}[
-  language=C++,
-  caption={Program halo dunia.},
-  label={lst:halodunia}
-]
-#include <iostream>
-
-int main() {
-    std::cout << "Halo Dunia!";
-    return 0;
-}
-\end{lstlisting}
-
-\lipsum[2-3]
-
-% Contoh input potongan kode dari file
-\lstinputlisting[
-  language=Python,
-  caption={Program perhitungan bilangan prima.},
-  label={lst:bilanganprima}
-]{program/bilangan-prima.py}
-
-\lipsum[4]
 
