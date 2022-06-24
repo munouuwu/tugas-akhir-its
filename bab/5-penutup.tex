@@ -6,29 +6,33 @@
 \section{Kesimpulan}
 \label{sec:kesimpulan}
 
-Berdasarkan hasil pengujian yang \lipsum[1][1-3] sebagai berikut:
+Berdasarkan hasil pengujian yang dilakukan penulis berhasil menerapkan sebuah sistem untuk mengklasifikasikan genre dan subgenre musik dengan MFCC sebagai fiturnya serta menggunakan CNN sebagai algoritmanya. Untuk lebih dalamnya dapat dilihat sebagai berikut:
 
 \begin{enumerate}[nolistsep]
 
-  \item Pembuatan \lipsum[2][1-3]
+  \item Sistem membuktikan bahwa algoritma CNN dapat digunakan untuk mengklasifikasikan subgenre dari suatu input data musik.
 
-  \item \lipsum[2][4-6]
+  \item Akurasi training tertinggi didapat pada Batch Size = 32, dan Epoch = 100 dengan hasil 46,39\%.
 
-  \item \lipsum[2][7-10]
+  \item Berdasarkan hasil dari Confusion Matrix, didapatkan bahwa sistem dapat mengklasifikasikan subgenre Chiptune dengan baik, namun sebaliknya pengklasifikasian subgenre Psych Folk masih sering disalah artikan sebagai subgenre lainnya, seperti Post Rock, Loud Rock, Noise Rock, dan Freak Folk.
+  
+  \item Terbukti output dari sistem dapat mengklasifikasikan suatu input data musik ke tiga terbesar subgenrenya yang paling masuk akal.
+  
+  \item Durasi input musik memiliki peran besar dalam meningkatkan akurasi dari klasifikasi. Berdasarkan Gambar 4.22 dan Gambar 4.23, didapatkan akurasi tertinggi pada input musik dengan durasi 30 detik.
 
 \end{enumerate}
 
 \section{Saran}
 \label{chap:saran}
 
-Untuk pengembangan lebih lanjut pada \lipsum[1][1-3] antara lain:
+Untuk pengembangan lebih lanjut pada penelitian ini terdapat beberapa saran yang mungkin bisa dilakukan pada penelitian selanjutnya, yaitu antara lain:
 
 \begin{enumerate}[nolistsep]
 
-  \item Memperbaiki \lipsum[2][1-3]
+  \item Menggunakan dataset yang memiliki lebih banyak serta lebih dapat diandalkan agar dapat menguji coba sistem dengan lebih banyak subgenre, jumlah trek, serta durasi yang lebih panjang pula.
 
-  \item \lipsum[2][4-6]
+  \item Menggunakan fitur-fitur audio lain selain MFCC agar dapat menguji coba efektifitas masing-masing fitur audio dalam pengklasifikasian subgenre musik.
 
-  \item \lipsum[2][7-10]
+  \item Menggunakan algoritma machine learning maupun deep learning yang lain untuk menguji efisiensi dari masing-masing algoritma dalam pengklasifikasian subgenre musik.
 
 \end{enumerate}

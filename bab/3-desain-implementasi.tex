@@ -18,7 +18,7 @@ Peralatan yang digunakan pada Tugas Akhir ini antara lain adalah Free Music Arch
 
 \subsection{Free Music Archive}
 \label{subsec:fma}
-Free Music Archive (FMA) merupakan sebuah dataset open-source yang biasa digunakan untuk keperluan Music Information Retrieval (MIR), seperti pengolahan data audio musik beserta fitur-fiturnya. Dataset ini berisikan 106.754 trek musik dengan metadatanya seperti ID, title, artist, genres, tags, dan play counts. Pada dataset ini terdapat total 161 genre (termasuk subgenre)\citep{fmadataset}.
+Free Music Archive (FMA) merupakan sebuah dataset open-source yang biasa digunakan untuk keperluan Music Information Retrieval (MIR), seperti pengolahan data audio musik beserta fitur-fiturnya. Dataset ini berisikan sejumlah file sebesar 917 GB yang berisikan 106.754 trek musik dari 16.341 artis dan 14.854 album dengan metadatanya seperti ID, title, artist, genres, tags, dan play counts. Pada dataset ini terdapat total 161 genre (termasuk subgenre) yang tersusun secara hierarkis\citep{DBLP:journals/corr/BenziDVB16}.
 
 \subsection{Anaconda Navigator}
 \label{subsec:anacondanav}
@@ -76,12 +76,23 @@ Desktop PC digunakan sebagai device untuk menjalankan Visual Studio Code dan pen
 
 Tugas Akhir ini mengimplementasikan Deep Learning untuk mengklasifikasikan subgenre dari suatu input potongan trek musik 30 detik yang berasal dari genre yang berbeda-beda menggunakan algoritma Convolutional Neural Network (CNN).
 
+\begin{figure}[H]
+	\centering
+	
+	% Ubah dengan nama file gambar dan ukuran yang akan digunakan
+	\includegraphics[width=1\textwidth]{gambar/desain sistem3}
+	
+	% Ubah dengan keterangan gambar yang diinginkan
+	\caption{Desain Sistem}
+	\label{fig:desainsistem}
+\end{figure}
+
 Tahapan sistem klasifikasi subgenre musik sesuai pada Gambar 3.1:
 
 \begin{enumerate}
 	\item Pengumpulan Data
 	
-	Dataset yang digunakan adalah Free Music Archive yang berisikan potongan-potongan musik dengan durasi 30 detik yang sudah dilabeli subgenrenya.
+	Dataset yang digunakan adalah \emph{Free Music Archive} (FMA) \citep{DBLP:journals/corr/BenziDVB16} yang berisikan potongan-potongan musik dengan durasi 30 detik yang sudah dilabeli subgenrenya.
 	\item Preprocessing Data
 	
 	Tahap ini meliputi pemotongan input trek menjadi beberapa segmen serta ekstraksi MFCC yang kemudian dikompilasikan di sebuah file json.
@@ -91,7 +102,7 @@ Tahapan sistem klasifikasi subgenre musik sesuai pada Gambar 3.1:
 	
 	\item Testing
 	
-	Mengevaluasi model yang telah dilakukan training dengan simulasi test data yang kemudian dihitung akurasinya.
+	Mengevaluasi model yang telah dilakukan training menggunakan testing data yang kemudian dihitung akurasinya.
 	
 	\item Simulasi
 	
@@ -99,23 +110,10 @@ Tahapan sistem klasifikasi subgenre musik sesuai pada Gambar 3.1:
 	
 \end{enumerate}
 
-\begin{figure}[b]
-	\centering
-	
-	% Ubah dengan nama file gambar dan ukuran yang akan digunakan
-	\includegraphics[width=\textwidth]{gambar/desain sistem2}
-	
-	% Ubah dengan keterangan gambar yang diinginkan
-	\caption{Desain Sistem}
-	\label{fig:desainsistem}
-\end{figure}
-
-
-
 \section{Pengumpulan Dataset}
 \label{sec:pengumpulan dataset}
 
-Dataset yang digunakan merupakan kumpulan musik dari 3 Genre, yaitu Rock, Folk, dan Electronic. Lalu, diambil masing-masing 3 Subgenre dengan jumlah trek sebanyak 200 tiap subgenrenya sehingga mencapai total 2700 trek. Kumpulan musik ini berupa file mp3 dari potongan 30 detik lagu yang disediakan oleh Free Music Archive(FMA) \citep{fmadataset}. FMA ini sendiri merupakan sebuah website yang berisikan kumpulan musik-musik royalty-free. Berikut tabel dataset yang digunakan pada Tugas Akhir ini:
+Dataset yang digunakan merupakan kumpulan musik dari 3 Genre, yaitu Rock, Folk, dan Electronic. Lalu, diambil masing-masing 3 Subgenre dengan jumlah trek sebanyak 200 tiap subgenrenya sehingga mencapai total 2700 trek. Kumpulan musik ini berupa file mp3 dari potongan 30 detik lagu yang disediakan oleh Free Music Archive(FMA) \citep{DBLP:journals/corr/BenziDVB16}. FMA ini sendiri merupakan sebuah website yang berisikan kumpulan musik-musik royalty-free. Berikut tabel dataset yang digunakan untuk training ini tertera pada Tabel 3.3.
 
 \begin{table}[h]
 	\centering
@@ -142,9 +140,9 @@ Dataset yang digunakan merupakan kumpulan musik dari 3 Genre, yaitu Rock, Folk, 
 \section{Preprocessing Data}
 \label{sec:preprocessing}
 
-Sebelum dataset kumpulan musik diolah, perlu untuk dilakukan ekstraksi fitur yang dibutuhkan terlebih dahulu. Fitur yang digunakan pada Tugas Akhir ini adalah Mel-frequency cepstral coefficients (MFCC). Sebelum ekstraksi, dilakukan segmentasi file audio menjadi 10 segmen. Dengan ini, maka didapat potongan 3 detik sebanyak 10 buah per trek musik 30 detik. Hal ini dilakukan karena pada deep learning diperlukan jumlah dataset yang banyak. 
+Sebelum dataset kumpulan musik diolah, perlu untuk dilakukan ekstraksi fitur yang dibutuhkan terlebih dahulu. Fitur yang digunakan pada Tugas Akhir ini adalah Mel-frequency cepstral coefficients (MFCC). Sebelum ekstraksi, dilakukan segmentasi file audio menjadi 10 segmen. Dengan ini, maka didapat potongan 3 detik sebanyak 10 buah per trek musik 30 detik. Hal ini dilakukan untuk memperbanyak jumlah data untuk training karena pada \emph{deep learning} pada umumnya diperlukan jumlah dataset yang relatif lebih banyak dibandingkan dengan \emph{machine learning} klasik. 
 
-\begin{table}[h]
+\begin{table}[H]
 	
 	\centering
 	
@@ -164,7 +162,7 @@ Sebelum dataset kumpulan musik diolah, perlu untuk dilakukan ekstraksi fitur yan
 
 Setelah segmentasi, dilakukan ekstraksi MFCC dengan parameter seperti yang tertera pada Tabel 3.3. Berikut Gambar 3.2 adalah hasil contoh ekstraksi trek musik 30 detik menjadi 10 segmen MFCC.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	
 	% Ubah dengan nama file gambar dan ukuran yang akan digunakan
@@ -239,4 +237,28 @@ Classes merupakan jumlah label subgenre yang ingin diklasifikasikan. Batch size 
 
 Pada tahap testing, dilakukan perhitungan serta plotting confusion matrix untuk dapat melihat performa model untuk mengklasifikasikan masing-masing subgenre. Selain itu, dapat juga diketahui similaritas dari masing-masing subgenre serta hubungan antara satu dengan yang lainnya. Selanjutnya, dilakukan percobaan dengan input trek musik dengan berbagai macam durasi (maksimal 30 detik) dan melihat prediksi yang dilakukan oleh sistem dengan cara menampilkan 3 subgenre dengan probabilitas tertinggi.
 
+\section{Rencana Pengujian dan Simulasi}
+\label{sec:rencanapengujian}
 
+Pada tahap ini dilakukan beberapa pengujian untuk mengetes performa dari implementasi sistem. Tahap pengujain dibagi menjadi beberapa bagian, yaitu:
+
+\begin{enumerate}
+	\item Pengujian pengaruh batch size dan epoch terhadap model
+	\begin{enumerate}
+		\item Batch size = 8; Epoch = 80
+		\item Batch size = 8; Epoch = 100
+		\item Batch size = 16; Epoch = 80
+		\item Batch size = 16; Epoch = 100
+		\item Batch size = 32; Epoch = 80
+		\item Batch size = 32; Epoch = 100
+	\end{enumerate}
+	
+	\item Pengujian pengaruh durasi input audio terhadap hasil klasifikasi
+	\begin{enumerate}
+		\item 30 detik
+		\item 15 detik
+		\item 9 detik
+		\item 3 detik
+	\end{enumerate}
+	
+\end{enumerate}
